@@ -1,6 +1,7 @@
 FROM ubuntu:latest
 
 ENV DEBIAN_FRONTEND=noninteractive
+
 RUN apt update
 RUN apt install apache2 -y 
 RUN apt install php php-mysql php-xml \
@@ -9,10 +10,9 @@ RUN apt install php php-mysql php-xml \
 RUN a2enmod env rewrite dir mime headers setenvif ssl
 RUN apt install mariadb-server sudo -y
 RUN apt install git -y
-WORKDIR /var/www/
 
 RUN git clone --depth 1 --branch v31.0.5 https://github.com/nextcloud/server.git /var/www/server && \
-    cd server && \
+    cd /var/www/server && \
     git submodule update --init && \
     chown -R www-data:www-data /var/www/server/
 
@@ -25,8 +25,9 @@ RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
     -subj "/C=DE/ST=Bayern/L=Nürnberg/O=Netways GmbH/CN=localhost" \
     -keyout /etc/apache2/ssl/selfsigned.key \
     -out /etc/apache2/ssl/selfsigned.crt
-
 RUN mkdir -p /home/data && chown -R www-data:www-data /home/data
+
+WORKDIR /home/data/
 
 COPY entrypoint.sh /entrypoint.sh
 
