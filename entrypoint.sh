@@ -24,7 +24,6 @@ CREATE DATABASE ${db_name};
 GRANT ALL PRIVILEGES ON ${db_name}.* TO '${db_username}'@'localhost';
 FLUSH PRIVILEGES;" 
 
-
 echo "Installing Nextcloud..."
 
 sudo -u www-data php /var/www/server/occ maintenance:install \
@@ -36,4 +35,5 @@ sudo -u www-data php /var/www/server/occ maintenance:install \
     --admin-pass="${nc_password}" \
     --data-dir="/home/data"
 
+echo "Ended script"
 exec apache2ctl -D FOREGROUND
