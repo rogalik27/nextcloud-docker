@@ -1,0 +1,10 @@
+services:
+  nextcloud:
+    build: .
+    container_name: nextcloud
+    ports:
+      - "8080:80"
+    environment: 
+      NC_DB_NAME: test1
+      NC_USERNAME: Marcel
+      NC_PASSWORD: Marcel
