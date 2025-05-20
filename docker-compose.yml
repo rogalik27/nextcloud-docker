@@ -4,6 +4,7 @@ services:
     container_name: nextcloud
     ports:
       - "8080:80"
+      - "8443:443"
     environment: 
       NC_DB_NAME: test1
       NC_USERNAME: Marcel

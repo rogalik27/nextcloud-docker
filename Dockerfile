@@ -16,7 +16,16 @@ RUN git clone --depth 1 --branch v31.0.5 https://github.com/nextcloud/server.git
     git submodule update --init && \
     chown -R www-data:www-data /var/www/server/
 
-EXPOSE 80
+EXPOSE 80 
+EXPOSE 443
+
+RUN mkdir -p /etc/apache2/ssl
+
+RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+    -subj "/C=DE/ST=Bayern/L=Nürnberg/O=Netways GmbH/CN=localhost" \
+    -keyout /etc/apache2/ssl/selfsigned.key \
+    -out /etc/apache2/ssl/selfsigned.crt
+
 RUN mkdir -p /home/data && chown -R www-data:www-data /home/data
 
 COPY entrypoint.sh /entrypoint.sh
