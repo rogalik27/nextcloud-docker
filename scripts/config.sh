@@ -2,8 +2,6 @@
 ip="$(curl -s https://ipinfo.io/ip | tr -d '\n')"
 touch scriptdone
 
-echo "\n\n\nscriptdone\n\n\n"
-
 cat<<PHP
 <?php
 \$CONFIG = array (

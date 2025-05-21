@@ -8,7 +8,7 @@ RUN apt install php php-mysql php-imagick php-xml \
     libapache2-mod-php php-curl \
     php-zip php-gd php-mbstring -y
 RUN a2enmod env rewrite dir mime headers setenvif ssl
-RUN apt install sudo mariadb-client -y
+RUN apt install sudo curl mariadb-client -y
 RUN apt install git -y
 
 RUN git clone --depth 1 --branch v31.0.5 https://github.com/nextcloud/server.git /var/www/server && \
