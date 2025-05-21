@@ -23,6 +23,9 @@ php /var/www/server/occ maintenance:install \
 php /var/www/server/occ app:disable files_reminder
 
 chown -R www-data:www-data /home/data
+
+config.sh > /home/ubuntu/myconfig.config.php
+
 mv /home/ubuntu/myconfig.config.php /var/www/server/config
 chown -R www-data:www-data /var/www/server/config
 

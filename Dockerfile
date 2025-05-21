@@ -28,7 +28,9 @@ RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
 
 WORKDIR /home/data/
 
-COPY entrypoint.sh /entrypoint.sh
+COPY scripts/entrypoint.sh /entrypoint.sh
+
+COPY scripts/config.sh /config.sh
 
 COPY conf.d/000-default.conf /etc/apache2/sites-enabled/000-default.conf
 
@@ -37,6 +39,6 @@ COPY conf.d/99-nextcloud.ini /etc/php/8.3/apache2/conf.d/99-nextcloud.ini
 COPY conf.d/myconfig.config.php /home/ubuntu/myconfig.config.php
 
 RUN chmod +x /entrypoint.sh
+RUN chmod +x /config.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
-
