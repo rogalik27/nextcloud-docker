@@ -6,6 +6,34 @@ services:
       - "8080:80"
       - "8443:443"
     environment: 
-      NC_DB_NAME: test1
+      MYSQL_DATABASE: test1
+      MYSQL_USER: ncloud
+      MYSQL_PASSWORD: ncloud
       NC_USERNAME: Marcel
       NC_PASSWORD: Marcel
+    volumes:
+      - ./volumes/config:/var/www/server/config
+      - ./volumes/data:/home/data
+    depends_on:
+      db:
+        condition: service_healthy 
+  db:
+    image: mariadb:10.6
+    container_name: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test1
+      MYSQL_USER: ncloud
+      MYSQL_PASSWORD: ncloud
+      MYSQL_SSL_DISABLED: true
+    volumes:
+      - ./volumes/mysql:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD", "healthcheck.sh", "--su-mysql", "--connect", "--innodb_initialized" ]
+      start_period: 1m
+      start_interval: 1s
+      interval: 2s
+      timeout: 3s
+      retries: 15
+    ports:
+      - "3306:3306"
