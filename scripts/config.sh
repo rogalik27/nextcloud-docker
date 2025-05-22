@@ -1,6 +1,6 @@
 #!/bin/sh
 ip="$(curl -s https://ipinfo.io/ip | tr -d '\n')"
-domain="${DOMAIN}"
+domain="${DOMAIN:-localhost}"
 touch scriptdone
 
 cat<<PHP
