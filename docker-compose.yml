@@ -11,6 +11,7 @@ services:
       MYSQL_PASSWORD: ncloud
       NC_USERNAME: Marcel
       NC_PASSWORD: Marcel
+      DOMAIN: nextcloud-docker.duckdns.org
     volumes:
       - ./volumes/config:/var/www/server/config
       - ./volumes/data:/home/data

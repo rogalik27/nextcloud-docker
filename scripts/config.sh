@@ -1,5 +1,6 @@
 #!/bin/sh
 ip="$(curl -s https://ipinfo.io/ip | tr -d '\n')"
+domain="${DOMAIN}"
 touch scriptdone
 
 cat<<PHP
@@ -10,6 +11,7 @@ cat<<PHP
   array (
     0 => 'localhost',
     1 => '$ip',
+    2 => '$domain'
   ),
   "force_language" => "en",
 );
