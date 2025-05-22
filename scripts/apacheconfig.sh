@@ -11,8 +11,8 @@ cat<<EOF
         Header always set Strict-Transport-Security "max-age=15552000; includeSubDomains; preload"
 
         SSLEngine on
-        SSLCertificateFile      /etc/apache2/ssl/selfsigned.crt
-        SSLCertificateKeyFile   /etc/apache2/ssl/selfsigned.key
+        SSLCertificateFile      ${SSL_CERT_PATH}
+        SSLCertificateKeyFile   ${SSL_KEY_PATH}
 
         <Directory /var/www/server>
             Options Indexes FollowSymLinks

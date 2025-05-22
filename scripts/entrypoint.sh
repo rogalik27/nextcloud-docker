@@ -6,10 +6,36 @@ db_password="${MYSQL_PASSWORD:-ncloud}"
 nc_username="${NC_USERNAME:-ncloud}"
 nc_password="${NC_PASSWORD:-admin}"
 
+SSL_DIR="/etc/apache2/ssl"
+CRT_FILE=""
+KEY_FILE=""
 
 echo "Installing Nextcloud..."
+CRT_FILE=$(find "$SSL_DIR" -maxdepth 1 -type f -name '*.crt' | head -n1)
+KEY_FILE=$(find "$SSL_DIR" -maxdepth 1 -type f -name '*.key' | head -n1)
 
+if [ -z "$CRT_FILE" ] || [ -z "$KEY_FILE" ]; then
+  echo "[SSL Skript] Keine Zertifikat/Schlüssel gefunden. Erstelle neue"
 
+  CRT_FILE="$SSL_DIR/selfsigned.crt"
+  KEY_FILE="$SSL_DIR/selfsigned.key"
+
+  mkdir -p "$SSL_DIR"
+
+  openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+    -subj "/C=DE/ST=Bayern/L=Nürnberg/O=Netways GmbH/CN=localhost" \
+    -keyout "$KEY_FILE" \
+    -out    "$CRT_FILE"
+else
+  echo "[SSL Skript] Zertifikat gefunden: $CRT_FILE"
+  echo "[SSL Skript] Schlüssel gefunden: $KEY_FILE"
+fi
+
+export SSL_CERT_PATH="$CRT_FILE"
+export SSL_KEY_PATH="$KEY_FILE"
+
+echo "[SSL Skript] Exportiert ENV SSL_CERT_PATH=$SSL_CERT_PATH"
+echo "[SSL Skript] Exportiert ENV SSL_KEY_PATH=$SSL_KEY_PATH"
 php /var/www/server/occ maintenance:install \
     --database="${db_driver}" \
     --database-name="${db_name}" \

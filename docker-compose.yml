@@ -13,6 +13,7 @@ services:
       NC_PASSWORD: Marcel
       DOMAIN: nextcloud-docker.duckdns.org
     volumes:
+      - ./volumes/ssl:/etc/apache2/ssl
       - ./volumes/config:/var/www/server/config
       - ./volumes/data:/home/data
     depends_on:

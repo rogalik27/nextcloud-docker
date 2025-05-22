@@ -19,13 +19,6 @@ RUN git clone --depth 1 --branch v31.0.5 https://github.com/nextcloud/server.git
 EXPOSE 80 
 EXPOSE 443
 
-RUN mkdir -p /etc/apache2/ssl
-
-RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
-    -subj "/C=DE/ST=Bayern/L=Nürnberg/O=Netways GmbH/CN=localhost" \
-    -keyout /etc/apache2/ssl/selfsigned.key \
-    -out /etc/apache2/ssl/selfsigned.crt
-
 WORKDIR /
 
 COPY scripts/entrypoint.sh /entrypoint.sh
