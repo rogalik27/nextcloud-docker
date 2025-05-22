@@ -14,7 +14,6 @@ services:
     volumes:
       - ./volumes/config:/var/www/server/config
       - ./volumes/data:/home/data
-      - ./volumes/apps:/var/www/server/apps
     depends_on:
       db:
         condition: service_healthy 

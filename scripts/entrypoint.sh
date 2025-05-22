@@ -25,7 +25,6 @@ touch /var/www/server/config/myconfig.config.php
 ./config.sh > /var/www/server/config/myconfig.config.php
 
 chown -R www-data:www-data /var/www/server/config
-chown -R www-data:www-data /var/www/server/apps
 
 php /var/www/server/occ maintenance:repair --include-expensive
 
