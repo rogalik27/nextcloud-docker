@@ -32,10 +32,11 @@ COPY scripts/entrypoint.sh /entrypoint.sh
 
 COPY scripts/config.sh /config.sh
 
-COPY conf.d/000-default.conf /etc/apache2/sites-enabled/000-default.conf
+COPY scripts/apacheconfige.sh /apacheconfig.sh
 
 COPY conf.d/99-nextcloud.ini /etc/php/8.3/apache2/conf.d/99-nextcloud.ini
 
+RUN chmod +x /apacheconfig.sh
 RUN chmod +x /entrypoint.sh
 RUN chmod +x /config.sh
 
