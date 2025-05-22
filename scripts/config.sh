@@ -11,5 +11,6 @@ cat<<PHP
     0 => 'localhost',
     1 => '$ip',
   ),
+  "force_language" => "en",
 );
 PHP
