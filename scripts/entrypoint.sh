@@ -20,8 +20,6 @@ php /var/www/server/occ maintenance:install \
     --data-dir="/home/data" \
     --database-host="db"
 
-php /var/www/server/occ app:disable files_reminder
-
 chown -R www-data:www-data /home/data
 touch /var/www/server/config/myconfig.config.php
 ./config.sh > /var/www/server/config/myconfig.config.php
