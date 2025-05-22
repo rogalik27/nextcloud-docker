@@ -32,7 +32,7 @@ COPY scripts/entrypoint.sh /entrypoint.sh
 
 COPY scripts/config.sh /config.sh
 
-COPY scripts/apacheconfige.sh /apacheconfig.sh
+COPY scripts/apacheconfig.sh /apacheconfig.sh
 
 COPY conf.d/99-nextcloud.ini /etc/php/8.3/apache2/conf.d/99-nextcloud.ini
 
