@@ -24,7 +24,8 @@ chown -R www-data:www-data /home/data
 touch /var/www/server/config/myconfig.config.php
 touch /etc/apache2/sites-enabled/000-default.conf
 ./config.sh > /var/www/server/config/myconfig.config.php
-./apacheconfig.sh 
+./apacheconfig.sh > /etc/apache2/sites-enabled/000-default.conf
+
 chown -R www-data:www-data /var/www/server/config
 
 php /var/www/server/occ maintenance:repair --include-expensive

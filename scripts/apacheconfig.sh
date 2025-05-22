@@ -1,5 +1,6 @@
 #!/bin/sh
-domain="${DOMAIN:-localhost}"
+ip="$(curl -s https://ipinfo.io/ip | tr -d '\n')"
+domain="${DOMAIN:-$ip}"
 touch scriptdone2
 
 cat<<EOF
@@ -23,6 +24,6 @@ cat<<EOF
         CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
 <VirtualHost *:80>
-   Redirect permanent / ${domain}
+   Redirect permanent / https://${domain}
 </VirtualHost>
 EOF
