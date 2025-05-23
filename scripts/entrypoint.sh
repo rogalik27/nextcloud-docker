@@ -37,6 +37,8 @@ echo "[SSL Skript] Exportiert ENV SSL_CERT_PATH=$SSL_CERT_PATH"
 echo "[SSL Skript] Exportiert ENV SSL_KEY_PATH=$SSL_KEY_PATH"
 
 if [ -f /var/www/server/config/config.php ]; then
+  echo "[Nextcloud Install] Nextcloud bereits installiert."
+else
 echo "[Nextcloud Install] Nextcloud nicht gefunden. Installiere Nextcloud..."
 php /var/www/server/occ maintenance:install \
     --database="${db_driver}" \
@@ -52,8 +54,6 @@ php /var/www/server/occ maintenance:install \
     else
         echo "[Nextcloud Install] NExtcloud konnte nicht installiert werden."
     fi
-else
-  echo "[Nextcloud Install] Nextcloud bereits installiert."
 fi
 
 
